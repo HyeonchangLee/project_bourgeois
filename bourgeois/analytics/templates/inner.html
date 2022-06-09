@@ -1,0 +1,619 @@
+{% load static %}
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<!doctype html>
+<html lang="ko">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+
+<!--차트 삽입-->
+<script>
+    $(function(){
+        $.ajax({
+            url:"{% url 'analytics:chart_data' %}", //서버저장주소
+            data:{},
+            type:'GET',
+            dataType:"json",
+            success:function(data){
+                console.log(data)
+                console.log(data.aList.length)
+                
+                console.log(data.aList[0])
+                console.log(data.aList[0]['LOC'])
+                
+                const xdata = [] //x축
+                const ydata = [] //y축
+                const ydata2 = [] //y축2
+  
+                for(var i=0;i<data.aList.length;i++){
+                    xdata.push(data.aList[i]['LOC'])
+                    ydata.push(data.aList[i]['EXPENDITURE_ALL'])
+                    ydata2.push(data.aList[i]['EXPENDITURE_FOOD'])
+                }
+  
+                console.log(xdata)
+                console.log(ydata)
+                console.log(ydata2)
+  
+                const ctx = document.getElementById('myChart1').getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: xdata,
+                        datasets: [{
+                            label: '전체 지출',
+                            data: ydata,
+                            backgroundColor: [
+                                
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(54, 162, 235, 0.2)'
+  
+                            ],
+                            borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(54, 162, 235, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                          
+                          
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });//chart
+                
+            },//SUCCESS
+            error:function(){
+  
+            }
+        })//ajax
+     
+    })//function
+  </script>
+
+<title>상권에 진심, 부루주아</title>
+
+<meta name="viewport" content="width=device-width, user-scalable=no, width=1366">
+
+<link rel="shortcut icon" href="{% static 'resource/PC/images/favicon/favicon6654.ico?v1' %}">
+<link rel="icon" type="image/png" href="{% static 'resource/PC/images/favicon/favicon-32x326654.png?v1' %}" sizes="32x32">
+<link rel="icon" type="image/png" href="{% static 'resource/PC/images/favicon/favicon-16x166654.png?v1' %}"  sizes="16x16">
+<link rel="icon" type="image/png" href="{% static 'resource/PC/images/favicon/favicon-96x966654.png?v1' %}" sizes="96x96">
+<link rel="apple-touch-icon-precomposed" href="{% static 'resource/PC/images/favicon/apple-icon-120x1206654.png?v1' %}" sizes="120x120">
+<link rel="apple-touch-icon-precomposed" href="{% static 'resource/PC/images/favicon/apple-icon-180x1806654.png?v1' %}" sizes="180x180">
+<link rel="icon" type="image/png" href="{% static 'resource/PC/images/favicon/android-icon-192x1926654.png?v1' %}" sizes="192x192">
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'resource/PC/images/favicon/favicon.ico' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'resource/PC/css/p_common.min.css' %}" >
+<link rel="stylesheet" type="text/css" href="{% static 'resource/PC/css/p_contents.min.css' %}">
+
+</head>
+
+<body class="wrapper mainWrapper">
+<p class="skip"><a href="#container">본문 바로가기</a></p>
+
+<section id="wrapper">
+
+  <header>
+    <img src="" alt="">
+  <nav>
+    <div class="navList">
+      <h2><a href="#">업종분석</a></h2>
+      <h2><a href="#">매출분석</a></h2>
+      <h2><a href="#">인구분석</a></h2>
+      <h2><a href="#">MY분석</a></h2>
+      {% comment %} <h2><a href="../restaurant.jejupass.com/web.html">맛집</a></h2> {% endcomment %}
+      {% comment %} <h2><a href="../cafe.jejupass.com/web.html">카페패스</a></h2> {% endcomment %}
+    </div>
+    <div class="quickSearchWrap">
+      <button type="button" class="btSearch">빠른검색</button>
+      <div class="laySearch" style="display: none;">
+        <div class="quickSearchList">
+          <ul class="searchBtns quickSearchScript">
+            <li class="btAir"><a href="#" aria-selected="true" aria-controls="lay_airSearch">항공검색</a></li>
+          </ul>
+
+        </div>
+
+        <button type="button" class="closeL">검색닫기</button>
+        <div class="dimmed" style="opacity: 1;"></div>
+      </div>
+
+    </div>
+  </nav>
+  <div class="topUtil">
+    <a href="#" class="logout" style="display: none">로그아웃</a>
+    <a href="#" class="login" style="">로그인</a>
+    {% comment %} <a href="{% url 'member:mypage' %}" class="mypage" style="">마이페이지</a> {% endcomment %}
+    <a href="#" class="order" style="display: none">주문조회</a>
+    <a href="#" class="noticeBox" style="display: none">알림함</a>
+    <ul class="navEtc">
+      <li><a href="#">이벤트</a></li>
+      <li><a href="#">고객센터</a></li>
+    </ul>
+  </div>
+</header>
+    
+  <div id="container" class="container">
+		<div class="quickSearchList k1_main_search_area">
+            {% comment %} <!--상단 nav바-->
+			<ul class="searchBtns quickSearchScript">
+				<li class="btAir"><a href="#" aria-selected="false" aria-controls="main_airSearch">항공검색</a></li>
+				<li class="btRent"><a href="#" aria-selected="true" aria-controls="main_rentSearch">렌터카검색</a></li>
+				<li class="btStay"><a href="#" aria-selected="false" aria-controls="main_staySearch">숙박검색</a></li>
+				<li class="btFood"><a href="#" aria-selected="false" aria-controls="main_foodSearch">맛집검색</a></li>
+				<li class="btCafe"><a href="#" aria-selected="false" aria-controls="main_cafeSearch">카페검색</a></li>
+			</ul> {% endcomment %}
+
+            <!-- 검색 섹션 시작 -->
+			<div id="main_airSearch" class="k1_section_multi section_air">
+				<div class="kf_innergray">
+					<div class="kf_flightInner selectON"><!-- 버튼 클릭시 selectON 클래스 추가-->
+						<ul class="k1_flight_panel">
+							<li class="k1_area departure">
+								<p class="tit">출발</p>
+								<button type="button" aria-expanded="false"aria-controls="kf_departure" onclick="jppJs.quickSearch.open('air.html')">어디서 떠나시나요?</button>
+							</li>
+							<li class="k1_area destination">
+								<p class="tit">도착</p>
+								<button type="button" aria-expanded="false"aria-controls="kf_arrival" onclick="jppJs.quickSearch.open('air.html')">어디로 떠나시나요?</button>
+								<button type="button" aria-expanded="false" style="display:none"><strong>김포</strong><span class="engName">GMP</span></button>
+							</li>
+						</ul>
+						<button type="button" class="k1_icon i2">출발지와 도착지 바꾸기</button>
+					</div>
+
+					<div class="kf_flightInner kf_flightDate">
+						<ul class="k1_flight_panel">
+							<li class="k1_area">
+								<p class="tit">탑승일</p>
+								<button type="button" aria-expanded="false" onclick="jppJs.quickSearch.open('air.html')">탑승일을 선택해주세요.</button>
+								<button type="button" aria-expanded="false" style="display:none"><strong>22.07.09(목)</strong></button>
+							</li>
+						</ul>
+					</div>
+
+					<div class="kf_flightInner kf_flightInfo">
+						<ul class="k1_flight_panel">
+							<li class="k1_area">
+								<p class="tit">인원 및 좌석등급</p>
+								<button type="button" aria-expanded="false" onclick="jppJs.quickSearch.open('air.html')"><strong>성인2, 일반석</strong></button>
+							</li>
+						</ul>
+					</div>
+					<button type="submit" class="k1_btn_price_search" onclick="jppJs.quickSearch.open('air.html')">검색</button>
+				</div>
+			</div>
+            
+
+			<div id="main_rentSearch" class="k1_section_multi section_rent sectionON">
+				<div class="kf_innergray">
+					<div class="kf_flightInner kf_rentcarDate selectON"><!-- 버튼 클릭시 selectON 클래스 추가-->
+						<ul class="k1_flight_panel">
+							<li class="k1_area ">
+								<p class="tit">성별</p>
+								<button type="button" onclick="jppJs.quickSearch.open('rentcar.html')">전체</button>
+								<button type="button" style="display:none"><strong>22.08.18(목) ~ 22.08.20(금)</strong></button>
+							</li>
+						</ul>
+					</div>
+
+					<div class="kf_flightInner kf_rentcarTime">
+						<ul class="k1_flight_panel">
+							<li class="k1_area">
+								<p class="tit">연령대</p>
+								<button type="button" onclick="jppJs.quickSearch.open('rentcar.html')">전체</button>
+								<button type="button" style="display:none"><strong>09:00 ~ 09:00 (36시간)</strong></button>
+							</li>
+						</ul>
+					</div>
+
+					<div class="kf_flightInner kf_rentcarCondition">
+						<ul class="k1_flight_panel">
+							<li class="k1_area">
+								<p class="tit">지역</p>
+								<button type="button" onclick="jppJs.quickSearch.open('rentcar.html')">구로구</button>
+								<button type="button" style="display:none"><strong>차종 7, 완전자차</strong></button>
+							</li>
+						</ul>
+					</div>
+					<div class="kf_flightInner kf_rentcarDriver">
+						<ul class="k1_flight_panel">
+							<li class="k1_area">
+								<p class="tit">기간</p>
+								<button type="button" onclick="jppJs.quickSearch.open('rentcar.html')">전체</button>
+								<button type="button" style="display:none"><strong>25세이상, 2년이상</strong></button>
+							</li>
+						</ul>
+					</div>
+					<button type="submit" class="k1_btn_price_search" onclick="jppJs.quickSearch.open('rentcar.html')">검색</button>
+				</div>
+			</div>
+			<div id="main_staySearch" class="k1_section_multi section_stay">
+				<div class="kf_innergray">
+					<div class="kf_flightInner kf_stayDestination selectON"><!-- 버튼 클릭시 selectON 클래스 추가-->
+						<ul class="k1_flight_panel">
+							<li class="k1_area ">
+								<p class="tit">여행지</p>
+								<button type="button" onclick="jppJs.quickSearch.open('stay.html')">여행지를 선택하세요.</button>
+								<button type="button" style="display:none"><strong>제주특별자치도, 한국</strong></button>
+							</li>
+						</ul>
+					</div>
+
+					<div class="kf_flightInner kf_stayDate">
+						<ul class="k1_flight_panel">
+							<li class="k1_area ">
+								<p class="tit">숙박일</p>
+								<button type="button" onclick="jppJs.quickSearch.open('stay.html')">여행일정을 선택해주세요.</button>
+								<button type="button" style="display:none"><strong>22.08.18(목) ~ 22.08.20(금)</strong></button>
+							</li>
+						</ul>
+					</div>
+
+					<div class="kf_flightInner kf_stayNumber">
+						<ul class="k1_flight_panel">
+							<li class="k1_area ">
+								<p class="tit">인원</p>
+								<button type="button" onclick="jppJs.quickSearch.open('stay.html')">인원을 선택하세요.</button>
+								<button type="button" style="display:none"><strong>성인 2명</strong></button>
+							</li>
+						</ul>
+					</div>
+					<button type="submit" class="k1_btn_price_search" onclick="jppJs.quickSearch.open('stay.html')">검색</button>
+				</div>
+			</div>
+			<div id="main_foodSearch" class="k1_section_multi section_food">
+				<div class="kf_innergray">
+					<div class="kf_flightInner kf_food">
+						<div class="inpFrm inpDeleteAni">
+							<label for="inpFood" class="hidden">맛집 검색어 입력</label>
+							<span class="inpA">
+								<input type="text" id="inpFood" title="맛집을 검색하세요." placeholder="맛집을 검색하세요." onclick="jppJs.quickSearch.open('restaurant.html')">
+								<button type="button" class="btIco icDel">삭제</button>
+							</span>
+							<button type="submit" class="btnDefault btIco icoSearch colPoint" onclick="jppJs.quickSearch.open('restaurant.html')">검색</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="main_cafeSearch" class="k1_section_multi section_cafe">
+				<div class="kf_innergray">
+					<div class="kf_flightInner kf_cafe">
+						<div class="inpFrm inpDeleteAni">
+							<label for="inpCafe" class="hidden">카페 상호명 혹은 키워드 입력</label>
+							<span class="inpA">
+								<input type="text" id="inpCafe" title="상호명 혹은 키워드를 입력하세요." placeholder="상호명 혹은 키워드를 입력하세요." onclick="jppJs.quickSearch.open('cafe.html')">
+								<button type="button" class="btIco icDel">삭제</button>
+							</span>
+							<button type="submit" class="btnDefault btIco icoSearch colPoint" onclick="jppJs.quickSearch.open('cafe.html')">검색</button>
+						</div>
+					</div>
+				</div>
+			</div>
+            <!-- 검색 섹션 끝 -->
+		</div>
+
+
+         
+		<div id="contents" class="contents rentcarMainContests">
+            <!--영상 파트 시작-->
+			{% comment %}<div class="mainCont">
+				<div class="mainSignature">
+					<video muted="muted" autoplay="" loop="" playsinline="" onloadedmetadata="this.muted = true">
+						<source src="{% static 'resource/PC/images/esg/main_home_video03.mp4' %}" type="video/mp4">
+					</video>
+					 <div class="holder">
+						<strong class="titDep2">
+							<img src="{% static 'resource/PC/images/esg_main/ic_play.png' %}" alt="로고이미지"> <!--여기부터 -->
+						</strong>
+						<p class="desc">상권 분석의 기본,<br/>브르주아와 함께해 주세요</p>
+						<a href="javascript:jppJs.go('/web', 'esg');" class="btn">참여하기</a>
+					 </div>
+				</div>
+			</div>
+            <!--영상 파트 끝--> {% endcomment %}
+
+            <br>
+            <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@여기부터 주요 기능 섹션을 넣어주세요@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+            <!-- 메인의 차트 들어갈 곳 (서울 전체의 분석 등) -->
+            
+            <h3 class="titDep2">매출 추이</h3>
+            <div style="border: 1px solid black;" id="container">
+                <canvas id="myChart1" >
+                </canvas>
+            </div>
+            <h4 style="color: gray; text-align: right;">서울시 구별 지출 분석</h4>
+            
+            <!-- 차트 끝 -->
+
+
+            <!-- 메인의 차트 들어갈 곳 (서울 전체의 분석 등) -->
+            
+            <h3 class="titDep2">😎브루주아의 강력한 서비스들과 함께하면 사업 시작이 쉬워집니다</h3>
+            <div style="border: 1px solid black;" id="container">
+                <canvas id="myChart" >
+                </canvas>
+            </div>
+            <h4 style="color: gray; text-align: right;">서울시 구별 지출 분석</h4>
+            
+            <!-- 차트 끝 -->
+            <!-- 메인의 차트 들어갈 곳 (서울 전체의 분석 등) -->
+            
+            <h3 class="titDep2">😎브루주아의 강력한 서비스들과 함께하면 사업 시작이 쉬워집니다</h3>
+            <div style="border: 1px solid black;" id="container">
+                <canvas id="myChart" >
+                </canvas>
+            </div>
+            <h4 style="color: gray; text-align: right;">서울시 구별 지출 분석</h4>
+            
+            <!-- 차트 끝 -->
+            <!-- 메인의 차트 들어갈 곳 (서울 전체의 분석 등) -->
+            
+            <h3 class="titDep2">😎브루주아의 강력한 서비스들과 함께하면 사업 시작이 쉬워집니다</h3>
+            <div style="border: 1px solid black;" id="container">
+                <canvas id="myChart" >
+                </canvas>
+            </div>
+            <h4 style="color: gray; text-align: right;">서울시 구별 지출 분석</h4>
+            
+            <!-- 차트 끝 -->
+
+			<h3 class="titDep2">🧐멤버십 회원에게는 더 고도화된 데이터, 다양한 부가 기능, 더 쾌적한 서비스 환경 등의 혜택이 제공됩니다.</h3>
+            <div class="swiperWrap swiperDefault swiperEvent" data-options='{"loop": true, "autoplay": 3000, "Spacebetween": 16, "view" : 3}'>
+                <div class="swiper-container">
+                    <ul class="swiper-wrapper" id="promotionList">
+                        <!-- 임시 이미지 나중에 페이지 만들 것-->
+                        <img style="width: 700px auto;" src="{% static 'resource/PC/images/esg_main/planimage.png' %}" alt="plan">
+                    </ul>
+                </div>
+                {% comment %} <div class="swiper-pagination">
+                    <div class="btAutoplays">
+                        <button type="button" class="btStop">정지</button>
+                        <button type="button" class="btPlay">재생</button>
+                    </div>
+                </div> {% endcomment %}
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+
+            <!--데이터 요약분석 레퍼-->
+            <table>
+                <colgroup>
+                  <col width="40%">
+                  <col width="30%">
+                  <col width="30%">
+                </colgroup>
+                {% comment %} <tr>
+                  <th>지역</th>
+                  <th>분석 요약</th>
+                  <th>전분기 대비</th>
+                </tr> {% endcomment %}
+                <tr>
+                  <td>지역</td>
+                  <td>분석 요약</td>
+                  <td>전분기 대비</td>
+                </tr>
+                <tr>
+                  <td>구로구</td>
+                  <td>점포수 : 640개</td>
+                  <td>4.6%🔻</td>
+                </tr>
+                <tr>
+                  <td>구로구</td>
+                  <td>매출 : 2,729억</td>
+                  <td>255%🔺</td>
+                </tr>
+                <tr>
+                  <td>구로구</td>
+                  <td>유동인구 : 279.58만명</td>
+                  <td>34.1%🔺</td>
+                </tr>
+                <tr>
+                  <td>구로구</td>
+                  <td>주거인구 : 5.57만명</td>
+                  <td>1.1%🔺</td>
+                </tr>
+                
+                {% for a in aList  %}
+                  <tr>
+                    <td>{{a.LOC}}</td>
+                    <td class="table-title">{{a.EXPENDITURE_ALL}}</td>
+                    <td>{{a.EXPENDITURE_FOOD}}</td>
+                  </tr>
+                {% endfor %}
+            </table>
+
+            <!--데이터 요약분석 레퍼끝-->
+
+            {% comment %} 
+			<h3 class="titDep2">테마스토리</h3>
+			<div class="swiperWrap swiperDefault swiperMain" data-options='{"loop": true, "Spacebetween": 16, "view" : 3, "group" :3}'>
+				<div class="swiper-container">
+					<ul class="swiper-wrapper" id="storyList">
+					</ul>
+				</div>
+			</div>
+			
+			<ul class="mainTag" id="keywordList" storyTags>
+			</ul>
+			 {% endcomment %}
+
+            <!--데이터 세부분석 레퍼-->
+            <!--데이터 세부분석 레퍼끝-->
+
+
+
+        
+
+            {% comment %}             
+			<div class="mainCont">
+
+				<div class="mainCont">
+					<h3 class="titDep2">서비스 이용안내</h3>
+					<ul class="mainIcon">
+						<li class="reservation"><a href="../help.jejupass.com/web/help/notice/RENTCAR/2249a4.html?tabCode=RENTCAR"><span>렌터카 예약안내</span></a></li>
+		                <li class="insurance"><a href="../help.jejupass.com/web/help/notice/RENTCAR/2149a4.html?tabCode=RENTCAR"><span>렌터카 보험안내</span></a></li>
+		                <li class="return"><a href="../help.jejupass.com/web/help/notice/RENTCAR/349a4.html?tabCode=RENTCAR"><span>렌터카 인수반납</span></a></li>
+		                <li class="info"><a href="../cafe.jejupass.com/web/buyGuide.html"><span>카페패스 이용안내</span></a></li>
+		                <li class="cancellation"><a href="../help.jejupass.com/web/help/notice/COMMON/25e22c.html?tabCode=AIR"><span>결항안내</span></a></li>
+		                <li class="refund"><a href="../help.jejupass.com/web/help/notice/COMMON/26849c.html?tabCode=ALL"><span>취소/환불 안내</span></a></li>
+					</ul>
+					<div class="mainNews">
+						<div class="txt">
+							<h4 class="titDep3">제주패스 뉴스레터 구독하기</h4>
+							<p class="desc">매주 제주의 속깊은 이야기를 받아보세요!</p>
+						</div>
+						<div class="email">
+							<input type="text" placeholder="구독신청 이메일을 입력해주세요." subscriptionsInp>
+							<button type="button" class="btnDefault btnL action" subscriptionsBtn>신청</button>
+						</div>
+					</div>
+				</div>
+			</div> 
+            {% endcomment %}
+			<!-- //컨텐츠 영역 -->
+
+		</div>
+	</div>
+
+  
+
+</section><!-- //wrapper -->
+
+
+<footer>
+  <div class="footTop">
+    <div class="footInner">
+      <ul class="footMenu">
+        <li><strong class="tit">제주패스</strong><a href="web/introduce/company.html" role="button">회사소개</a><a href="../help.jejupass.com/web/help/benefits.html" role="button">회원혜택 안내</a></li>
+        <li><strong class="tit">고객센터</strong><a href="../help.jejupass.com/web/help/notice.html" role="button">공지사항</a><a href="../help.jejupass.com/web/help/faq.html" role="button">자주찾는질문</a><a href="../auth.jejupass.com/web/login.html#tabContents02" role="button">예약확인</a></li>
+        <li><strong class="tit">ESG</strong><a href="../esg.jejupass.com/web/ambassador.html" role="button">그린 앰버서더</a><a href="../esg.jejupass.com/web/campaigns1c7b.html?status=IN_PROGRESS" role="button">캠페인 기부</a></li>
+      </ul>
+      <div class="footAppDown">
+        <h5>App 다운로드</h5>
+        <span class="txt">제주패스 앱 설치하고 <br>더 편리하게 이용하세요.</span>
+        <ul class="appLink">
+          <li><button type="button" class="google" onclick="location.href='../play.google.com/store/apps/details8eb0.html?id=com.kaflix.jejupass&amp;rdid=com.kaflix.jejupass&amp;feature=md&amp;offerId';">구글플레이</button></li>
+          <li><button type="button" class="ios" onclick="location.href='../apps.apple.com/us/app/%ec%a0%9c%ec%a3%bc%ed%8c%a8%ec%8a%a4-%ec%a7%80%ec%86%8d%ea%b0%80%eb%8a%a5%ed%95%9c-%ec%a0%9c%ec%a3%bc-%ec%97%ac%ed%96%89%ec%9d%98-%ec%8a%88%ed%8d%bc%ec%95%b1/id1615900097.html';">앱스토어</button></li>
+        </ul>
+      </div>
+      <div class="footCenter">
+        <h5>전화예약 / 고객상담</h5>
+        <span class="txt">이용에 궁금하신 점이 <br>있으신가요?</span>
+        <div class="callInfo">
+          <p class="callNum">1544-0445</p>
+          <ul class="callTime">
+            <li><span class="tit">평일</span>09:00 ~ 18:00</li>
+            <li><span class="tit">점심시간</span>12:00 ~ 13:00</li>
+          </ul>
+        </div>
+        <div class="snsList">
+<!--          <a href="https://www.facebook.com/jejumatzipcafe" role="button" target="_blank" class="fb">페이스북</a>-->
+          <a href="../www.instagram.com/jejupass.official/index.html" role="button" target="_blank" class="insta">인스타그램</a>
+<!--          <a href="https://www.youtube.com/channel/UC1iUUuL6_SIKPeiifdABygw/about" role="button" target="_blank" class="youTube">유투브</a>-->
+          <a href="../blog.naver.com/jejubnf.html" role="button" target="_blank" class="blog">네이버 블로그</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footBtm">
+    <div class="footInner">
+      <ul class="footMenu">
+        <li><a href="web/policy/privacy.html" role="button">개인정보처리방침</a></li>
+        <li><a href="web/policy/use.html" role="button">이용약관</a></li>
+      </ul>
+      <p class="txtFoot">
+        <span>(주)캐플릭스 대표이사 : 윤형준</span>
+        <span>사업자등록번호 : 105-87-76000 <a class="btns" href="../www.ftc.go.kr/bizCommPop64eb.html?wrkr_no=1058776000" target="_blank">사업자정보조회</a>
+				</span>
+        <span>
+					통신판매신고 제2015-제주연동-43호
+				</span>
+        <span>관광사업자 등록번호 : 제2021-08호</span>
+      </p>
+      <p class="txtFoot" style="margin:0">
+        <span>제주특별자치도 제주시 신광로 21, 4층 (우)63125</span>
+      </p>
+      <p class="txtFoot02">
+        (주)캐플릭스는 개별 항공권 및 숙박 상품에 대하여 통신판매중개자로서 통신판매의 당사자가 아니며 해당상품의 거래정보 및 거래 등에 대해 책임을 지지 않습니다.
+        <br/>
+        (주)캐플릭스는 렌터카 파트너사가 제공하는 일부 렌터카에 대하여 통신판매중개자의 지위를 가지며, 해당 상품, 상품정보, 거래에 관한 의무와 책임은 판매자에게 있습니다.
+      </p>
+
+      <p class="txtCopy">
+        <span>Copyright ⓒ KAFLIX All Rights Reserved</span>
+      </p>
+      <div class="footEtc">
+        <span>SECURED BY RapidSSL</span>
+        <span>WEB AWARD 수상</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<div class="dimmed"></div>
+
+
+</body>
+
+<!-- Mirrored from www.jejupass.com/web by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 28 May 2022 06:29:41 GMT -->
+</html>
